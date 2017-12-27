@@ -225,41 +225,41 @@
 		2C0FC39B1FF425B40094A6C9 /* MPInterstitialAdController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEF9D537171CA895005AAA5A /* MPInterstitialAdController.m */; };
 		2C0FC39C1FF425B40094A6C9 /* MPInterstitialCustomEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = AEF9D539171CA895005AAA5A /* MPInterstitialCustomEvent.m */; };
 		2C0FC39D1FF425B40094A6C9 /* MoPub.m in Sources */ = {isa = PBXBuildFile; fileRef = A71DB8121A2FE68300D3B229 /* MoPub.m */; };
-		2C0FC39E1FF426220094A6C9 /* MPAdConversionTracker.h in Headers */ = {isa = PBXBuildFile; fileRef = AEF9D52E171CA895005AAA5A /* MPAdConversionTracker.h */; };
-		2C0FC39F1FF4262B0094A6C9 /* MPAdView.h in Headers */ = {isa = PBXBuildFile; fileRef = AEF9D530171CA895005AAA5A /* MPAdView.h */; };
-		2C0FC3A01FF426330094A6C9 /* MPBannerCustomEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = AEF9D532171CA895005AAA5A /* MPBannerCustomEvent.h */; };
-		2C0FC3A11FF4263D0094A6C9 /* MPBannerCustomEventDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = AEF9D534171CA895005AAA5A /* MPBannerCustomEventDelegate.h */; };
-		2C0FC3A21FF426440094A6C9 /* MPConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = AEF9D535171CA895005AAA5A /* MPConstants.h */; };
-		2C0FC3A31FF4264E0094A6C9 /* MPInterstitialAdController.h in Headers */ = {isa = PBXBuildFile; fileRef = AEF9D536171CA895005AAA5A /* MPInterstitialAdController.h */; };
-		2C0FC3A41FF426550094A6C9 /* MPInterstitialCustomEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = AEF9D538171CA895005AAA5A /* MPInterstitialCustomEvent.h */; };
-		2C0FC3A51FF4265D0094A6C9 /* MPInterstitialCustomEventDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = AEF9D53A171CA895005AAA5A /* MPInterstitialCustomEventDelegate.h */; };
-		2C0FC3A61FF426650094A6C9 /* MPNativeAd.h in Headers */ = {isa = PBXBuildFile; fileRef = A77FBEE618C533B400531E8A /* MPNativeAd.h */; };
-		2C0FC3A71FF4266C0094A6C9 /* MPNativeAdAdapter.h in Headers */ = {isa = PBXBuildFile; fileRef = 4AF54B40194A21340093F714 /* MPNativeAdAdapter.h */; };
-		2C0FC3A81FF426740094A6C9 /* MPNativeAdConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 578517F0193E68AF00C9C1B4 /* MPNativeAdConstants.h */; };
-		2C0FC3A91FF4267C0094A6C9 /* MPNativeCustomEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = 4A2E212E1936845D004A7899 /* MPNativeCustomEvent.h */; };
-		2C0FC3AA1FF426840094A6C9 /* MPNativeCustomEventDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 4A2E213619368773004A7899 /* MPNativeCustomEventDelegate.h */; };
-		2C0FC3AB1FF4268C0094A6C9 /* MPNativeAdError.h in Headers */ = {isa = PBXBuildFile; fileRef = A77FBEE418C533B400531E8A /* MPNativeAdError.h */; };
-		2C0FC3AC1FF426940094A6C9 /* MPNativeAdRendering.h in Headers */ = {isa = PBXBuildFile; fileRef = A77FBEE818C533B400531E8A /* MPNativeAdRendering.h */; };
-		2C0FC3AD1FF4269C0094A6C9 /* MPNativeAdRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = A77FBEE918C533B400531E8A /* MPNativeAdRequest.h */; };
-		2C0FC3AE1FF426A30094A6C9 /* MPNativeAdRequestTargeting.h in Headers */ = {isa = PBXBuildFile; fileRef = A77FBEEB18C533B400531E8A /* MPNativeAdRequestTargeting.h */; };
-		2C0FC3AF1FF426AA0094A6C9 /* MPCollectionViewAdPlacer.h in Headers */ = {isa = PBXBuildFile; fileRef = A7A1CDD61974783D0082A6FA /* MPCollectionViewAdPlacer.h */; };
-		2C0FC3B01FF426B10094A6C9 /* MPTableViewAdPlacer.h in Headers */ = {isa = PBXBuildFile; fileRef = A7A1CDD11974782E0082A6FA /* MPTableViewAdPlacer.h */; };
-		2C0FC3B11FF426B70094A6C9 /* MPClientAdPositioning.h in Headers */ = {isa = PBXBuildFile; fileRef = A7A9AC0C1974578E00C26A7E /* MPClientAdPositioning.h */; };
-		2C0FC3B21FF426BD0094A6C9 /* MPServerAdPositioning.h in Headers */ = {isa = PBXBuildFile; fileRef = A72F90EB19B7CA0400A5601B /* MPServerAdPositioning.h */; };
-		2C0FC3B31FF426C50094A6C9 /* MPNativeAdDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 4AD1D8F919E4958200705E52 /* MPNativeAdDelegate.h */; };
-		2C0FC3B41FF426CC0094A6C9 /* MPMediationSettingsProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 57ACE3FB1AA7E8D900A05633 /* MPMediationSettingsProtocol.h */; };
-		2C0FC3B51FF426D30094A6C9 /* MPRewardedVideo.h in Headers */ = {isa = PBXBuildFile; fileRef = 57ACE3F31AA7E8D900A05633 /* MPRewardedVideo.h */; };
-		2C0FC3B61FF426DB0094A6C9 /* MPRewardedVideoReward.h in Headers */ = {isa = PBXBuildFile; fileRef = 57ACE3F91AA7E8D900A05633 /* MPRewardedVideoReward.h */; };
-		2C0FC3B71FF426E10094A6C9 /* MPRewardedVideoCustomEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = 57ACE3F51AA7E8D900A05633 /* MPRewardedVideoCustomEvent.h */; };
-		2C0FC3B81FF426E70094A6C9 /* MPRewardedVideoError.h in Headers */ = {isa = PBXBuildFile; fileRef = 57ACE3F71AA7E8D900A05633 /* MPRewardedVideoError.h */; };
-		2C0FC3B91FF426EE0094A6C9 /* MPStaticNativeAdRendererSettings.h in Headers */ = {isa = PBXBuildFile; fileRef = 578D28851B9A410C002E3905 /* MPStaticNativeAdRendererSettings.h */; };
-		2C0FC3BA1FF426F50094A6C9 /* MPNativeAdRendererConfiguration.h in Headers */ = {isa = PBXBuildFile; fileRef = 578D287B1B9A406B002E3905 /* MPNativeAdRendererConfiguration.h */; };
-		2C0FC3BB1FF426FC0094A6C9 /* MPNativeAdRendererSettings.h in Headers */ = {isa = PBXBuildFile; fileRef = 578D287D1B9A406B002E3905 /* MPNativeAdRendererSettings.h */; };
-		2C0FC3BC1FF427050094A6C9 /* MPNativeAdRenderer.h in Headers */ = {isa = PBXBuildFile; fileRef = 573A82CC1B8E487300ED4067 /* MPNativeAdRenderer.h */; };
-		2C0FC3BD1FF4270B0094A6C9 /* MPStaticNativeAdRenderer.h in Headers */ = {isa = PBXBuildFile; fileRef = 573A82CF1B8E487300ED4067 /* MPStaticNativeAdRenderer.h */; };
-		2C0FC3BE1FF427120094A6C9 /* MOPUBNativeVideoAdRendererSettings.h in Headers */ = {isa = PBXBuildFile; fileRef = B294E0651BACDB1E00909531 /* MOPUBNativeVideoAdRendererSettings.h */; };
-		2C0FC3BF1FF427180094A6C9 /* MOPUBNativeVideoAdRenderer.h in Headers */ = {isa = PBXBuildFile; fileRef = B2E3F53B1BAB8529000BB32D /* MOPUBNativeVideoAdRenderer.h */; };
-		2C0FC3C01FF4271F0094A6C9 /* MPNativeAdRenderingImageLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = 5731A7AA1BBDFE8D00579ACE /* MPNativeAdRenderingImageLoader.h */; };
+		2C0FC39E1FF426220094A6C9 /* MPAdConversionTracker.h in Headers */ = {isa = PBXBuildFile; fileRef = AEF9D52E171CA895005AAA5A /* MPAdConversionTracker.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2C0FC39F1FF4262B0094A6C9 /* MPAdView.h in Headers */ = {isa = PBXBuildFile; fileRef = AEF9D530171CA895005AAA5A /* MPAdView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2C0FC3A01FF426330094A6C9 /* MPBannerCustomEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = AEF9D532171CA895005AAA5A /* MPBannerCustomEvent.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2C0FC3A11FF4263D0094A6C9 /* MPBannerCustomEventDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = AEF9D534171CA895005AAA5A /* MPBannerCustomEventDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2C0FC3A21FF426440094A6C9 /* MPConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = AEF9D535171CA895005AAA5A /* MPConstants.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2C0FC3A31FF4264E0094A6C9 /* MPInterstitialAdController.h in Headers */ = {isa = PBXBuildFile; fileRef = AEF9D536171CA895005AAA5A /* MPInterstitialAdController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2C0FC3A41FF426550094A6C9 /* MPInterstitialCustomEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = AEF9D538171CA895005AAA5A /* MPInterstitialCustomEvent.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2C0FC3A51FF4265D0094A6C9 /* MPInterstitialCustomEventDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = AEF9D53A171CA895005AAA5A /* MPInterstitialCustomEventDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2C0FC3A61FF426650094A6C9 /* MPNativeAd.h in Headers */ = {isa = PBXBuildFile; fileRef = A77FBEE618C533B400531E8A /* MPNativeAd.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2C0FC3A71FF4266C0094A6C9 /* MPNativeAdAdapter.h in Headers */ = {isa = PBXBuildFile; fileRef = 4AF54B40194A21340093F714 /* MPNativeAdAdapter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2C0FC3A81FF426740094A6C9 /* MPNativeAdConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 578517F0193E68AF00C9C1B4 /* MPNativeAdConstants.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2C0FC3A91FF4267C0094A6C9 /* MPNativeCustomEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = 4A2E212E1936845D004A7899 /* MPNativeCustomEvent.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2C0FC3AA1FF426840094A6C9 /* MPNativeCustomEventDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 4A2E213619368773004A7899 /* MPNativeCustomEventDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2C0FC3AB1FF4268C0094A6C9 /* MPNativeAdError.h in Headers */ = {isa = PBXBuildFile; fileRef = A77FBEE418C533B400531E8A /* MPNativeAdError.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2C0FC3AC1FF426940094A6C9 /* MPNativeAdRendering.h in Headers */ = {isa = PBXBuildFile; fileRef = A77FBEE818C533B400531E8A /* MPNativeAdRendering.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2C0FC3AD1FF4269C0094A6C9 /* MPNativeAdRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = A77FBEE918C533B400531E8A /* MPNativeAdRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2C0FC3AE1FF426A30094A6C9 /* MPNativeAdRequestTargeting.h in Headers */ = {isa = PBXBuildFile; fileRef = A77FBEEB18C533B400531E8A /* MPNativeAdRequestTargeting.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2C0FC3AF1FF426AA0094A6C9 /* MPCollectionViewAdPlacer.h in Headers */ = {isa = PBXBuildFile; fileRef = A7A1CDD61974783D0082A6FA /* MPCollectionViewAdPlacer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2C0FC3B01FF426B10094A6C9 /* MPTableViewAdPlacer.h in Headers */ = {isa = PBXBuildFile; fileRef = A7A1CDD11974782E0082A6FA /* MPTableViewAdPlacer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2C0FC3B11FF426B70094A6C9 /* MPClientAdPositioning.h in Headers */ = {isa = PBXBuildFile; fileRef = A7A9AC0C1974578E00C26A7E /* MPClientAdPositioning.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2C0FC3B21FF426BD0094A6C9 /* MPServerAdPositioning.h in Headers */ = {isa = PBXBuildFile; fileRef = A72F90EB19B7CA0400A5601B /* MPServerAdPositioning.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2C0FC3B31FF426C50094A6C9 /* MPNativeAdDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 4AD1D8F919E4958200705E52 /* MPNativeAdDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2C0FC3B41FF426CC0094A6C9 /* MPMediationSettingsProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 57ACE3FB1AA7E8D900A05633 /* MPMediationSettingsProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2C0FC3B51FF426D30094A6C9 /* MPRewardedVideo.h in Headers */ = {isa = PBXBuildFile; fileRef = 57ACE3F31AA7E8D900A05633 /* MPRewardedVideo.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2C0FC3B61FF426DB0094A6C9 /* MPRewardedVideoReward.h in Headers */ = {isa = PBXBuildFile; fileRef = 57ACE3F91AA7E8D900A05633 /* MPRewardedVideoReward.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2C0FC3B71FF426E10094A6C9 /* MPRewardedVideoCustomEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = 57ACE3F51AA7E8D900A05633 /* MPRewardedVideoCustomEvent.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2C0FC3B81FF426E70094A6C9 /* MPRewardedVideoError.h in Headers */ = {isa = PBXBuildFile; fileRef = 57ACE3F71AA7E8D900A05633 /* MPRewardedVideoError.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2C0FC3B91FF426EE0094A6C9 /* MPStaticNativeAdRendererSettings.h in Headers */ = {isa = PBXBuildFile; fileRef = 578D28851B9A410C002E3905 /* MPStaticNativeAdRendererSettings.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2C0FC3BA1FF426F50094A6C9 /* MPNativeAdRendererConfiguration.h in Headers */ = {isa = PBXBuildFile; fileRef = 578D287B1B9A406B002E3905 /* MPNativeAdRendererConfiguration.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2C0FC3BB1FF426FC0094A6C9 /* MPNativeAdRendererSettings.h in Headers */ = {isa = PBXBuildFile; fileRef = 578D287D1B9A406B002E3905 /* MPNativeAdRendererSettings.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2C0FC3BC1FF427050094A6C9 /* MPNativeAdRenderer.h in Headers */ = {isa = PBXBuildFile; fileRef = 573A82CC1B8E487300ED4067 /* MPNativeAdRenderer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2C0FC3BD1FF4270B0094A6C9 /* MPStaticNativeAdRenderer.h in Headers */ = {isa = PBXBuildFile; fileRef = 573A82CF1B8E487300ED4067 /* MPStaticNativeAdRenderer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2C0FC3BE1FF427120094A6C9 /* MOPUBNativeVideoAdRendererSettings.h in Headers */ = {isa = PBXBuildFile; fileRef = B294E0651BACDB1E00909531 /* MOPUBNativeVideoAdRendererSettings.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2C0FC3BF1FF427180094A6C9 /* MOPUBNativeVideoAdRenderer.h in Headers */ = {isa = PBXBuildFile; fileRef = B2E3F53B1BAB8529000BB32D /* MOPUBNativeVideoAdRenderer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2C0FC3C01FF4271F0094A6C9 /* MPNativeAdRenderingImageLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = 5731A7AA1BBDFE8D00579ACE /* MPNativeAdRenderingImageLoader.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4402E4811E80840E006B9D94 /* MPGoogleAdMobNativeCustomEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 4402E47A1E80840E006B9D94 /* MPGoogleAdMobNativeCustomEvent.m */; };
 		4402E4821E80840E006B9D94 /* MPGoogleAdMobNativeRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 4402E47C1E80840E006B9D94 /* MPGoogleAdMobNativeRenderer.m */; };
 		4402E4831E80840E006B9D94 /* MPGoogleAdMobRewardedVideoCustomEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 4402E47E1E80840E006B9D94 /* MPGoogleAdMobRewardedVideoCustomEvent.m */; };
@@ -2898,6 +2898,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2C0FC2F51FF425490094A6C9 /* Build configuration list for PBXNativeTarget "MoPubSDK-Carthage" */;
 			buildPhases = (
+				2C0FC3C31FF42CBF0094A6C9 /* ShellScript */,
 				2C0FC2E91FF425490094A6C9 /* Sources */,
 				2C0FC2EA1FF425490094A6C9 /* Frameworks */,
 				2C0FC2EB1FF425490094A6C9 /* Headers */,
@@ -3101,6 +3102,19 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		2C0FC3C31FF42CBF0094A6C9 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = ". \"${SRCROOT}/Scripts/build_scripts/mraid_build.sh\"\ncopyMRAIDToResources \"${SRCROOT}\"";
+		};
 		57240C381A68942D009271B8 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
