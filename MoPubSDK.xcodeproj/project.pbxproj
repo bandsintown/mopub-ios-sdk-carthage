@@ -261,6 +261,27 @@
 		2C0FC3BF1FF427180094A6C9 /* MOPUBNativeVideoAdRenderer.h in Headers */ = {isa = PBXBuildFile; fileRef = B2E3F53B1BAB8529000BB32D /* MOPUBNativeVideoAdRenderer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2C0FC3C01FF4271F0094A6C9 /* MPNativeAdRenderingImageLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = 5731A7AA1BBDFE8D00579ACE /* MPNativeAdRenderingImageLoader.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2C0FC3C41FF42F540094A6C9 /* MPAdPositioning.h in Headers */ = {isa = PBXBuildFile; fileRef = A7A1CDE019747D7F0082A6FA /* MPAdPositioning.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2C0FC3C51FF434420094A6C9 /* MPAdBrowserController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 57A1A37E1A780A55006A08DA /* MPAdBrowserController.xib */; };
+		2C0FC3C61FF434810094A6C9 /* MPCloseBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = B257A2FA1BA3911300F5D320 /* MPCloseBtn.png */; };
+		2C0FC3C71FF434810094A6C9 /* MPCloseBtn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B257A2FB1BA3911300F5D320 /* MPCloseBtn@2x.png */; };
+		2C0FC3C81FF434810094A6C9 /* MPCloseBtn@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = B257A2FC1BA3911300F5D320 /* MPCloseBtn@3x.png */; };
+		2C0FC3C91FF434810094A6C9 /* MPMutedBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = B257A3001BA3911300F5D320 /* MPMutedBtn.png */; };
+		2C0FC3CA1FF434810094A6C9 /* MPMutedBtn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B257A3011BA3911300F5D320 /* MPMutedBtn@2x.png */; };
+		2C0FC3CB1FF434810094A6C9 /* MPMutedBtn@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = B257A3021BA3911300F5D320 /* MPMutedBtn@3x.png */; };
+		2C0FC3CC1FF434810094A6C9 /* MPPlayBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = B257A3031BA3911300F5D320 /* MPPlayBtn.png */; };
+		2C0FC3CD1FF434810094A6C9 /* MPPlayBtn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B257A3041BA3911300F5D320 /* MPPlayBtn@2x.png */; };
+		2C0FC3CE1FF434810094A6C9 /* MPPlayBtn@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = B257A3051BA3911300F5D320 /* MPPlayBtn@3x.png */; };
+		2C0FC3CF1FF434810094A6C9 /* MPUnmutedBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = B257A3061BA3911300F5D320 /* MPUnmutedBtn.png */; };
+		2C0FC3D01FF434810094A6C9 /* MPUnmutedBtn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B257A3071BA3911300F5D320 /* MPUnmutedBtn@2x.png */; };
+		2C0FC3D11FF434810094A6C9 /* MPUnmutedBtn@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = B257A3081BA3911300F5D320 /* MPUnmutedBtn@3x.png */; };
+		2C0FC3D21FF434810094A6C9 /* MRAID.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 57214DE61A66FB4C0075BF95 /* MRAID.bundle */; };
+		2C0FC3D31FF434810094A6C9 /* MPCloseButtonX.png in Resources */ = {isa = PBXBuildFile; fileRef = 57214DDE1A66F9B20075BF95 /* MPCloseButtonX.png */; };
+		2C0FC3D41FF434810094A6C9 /* MPCloseButtonX@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 57214DDF1A66F9B20075BF95 /* MPCloseButtonX@2x.png */; };
+		2C0FC3D51FF434810094A6C9 /* MPCloseButtonX@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 57214DE01A66F9B20075BF95 /* MPCloseButtonX@3x.png */; };
+		2C0FC3D61FF434810094A6C9 /* MPDAAIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 57401A421B7AAEF0000EEA64 /* MPDAAIcon.png */; };
+		2C0FC3D71FF434810094A6C9 /* MPDAAIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 57401A431B7AAEF0000EEA64 /* MPDAAIcon@2x.png */; };
+		2C0FC3D81FF434810094A6C9 /* MPDAAIcon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 57401A441B7AAEF0000EEA64 /* MPDAAIcon@3x.png */; };
+		2C0FC3D91FF434810094A6C9 /* MPCountdownTimer.html in Resources */ = {isa = PBXBuildFile; fileRef = BCF0FA8A1DC9512900ADFE4F /* MPCountdownTimer.html */; };
 		4402E4811E80840E006B9D94 /* MPGoogleAdMobNativeCustomEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 4402E47A1E80840E006B9D94 /* MPGoogleAdMobNativeCustomEvent.m */; };
 		4402E4821E80840E006B9D94 /* MPGoogleAdMobNativeRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 4402E47C1E80840E006B9D94 /* MPGoogleAdMobNativeRenderer.m */; };
 		4402E4831E80840E006B9D94 /* MPGoogleAdMobRewardedVideoCustomEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 4402E47E1E80840E006B9D94 /* MPGoogleAdMobRewardedVideoCustomEvent.m */; };
@@ -3070,6 +3091,27 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C0FC3C61FF434810094A6C9 /* MPCloseBtn.png in Resources */,
+				2C0FC3C71FF434810094A6C9 /* MPCloseBtn@2x.png in Resources */,
+				2C0FC3C81FF434810094A6C9 /* MPCloseBtn@3x.png in Resources */,
+				2C0FC3C91FF434810094A6C9 /* MPMutedBtn.png in Resources */,
+				2C0FC3CA1FF434810094A6C9 /* MPMutedBtn@2x.png in Resources */,
+				2C0FC3CB1FF434810094A6C9 /* MPMutedBtn@3x.png in Resources */,
+				2C0FC3CC1FF434810094A6C9 /* MPPlayBtn.png in Resources */,
+				2C0FC3CD1FF434810094A6C9 /* MPPlayBtn@2x.png in Resources */,
+				2C0FC3CE1FF434810094A6C9 /* MPPlayBtn@3x.png in Resources */,
+				2C0FC3CF1FF434810094A6C9 /* MPUnmutedBtn.png in Resources */,
+				2C0FC3D01FF434810094A6C9 /* MPUnmutedBtn@2x.png in Resources */,
+				2C0FC3D11FF434810094A6C9 /* MPUnmutedBtn@3x.png in Resources */,
+				2C0FC3D21FF434810094A6C9 /* MRAID.bundle in Resources */,
+				2C0FC3D31FF434810094A6C9 /* MPCloseButtonX.png in Resources */,
+				2C0FC3D41FF434810094A6C9 /* MPCloseButtonX@2x.png in Resources */,
+				2C0FC3D51FF434810094A6C9 /* MPCloseButtonX@3x.png in Resources */,
+				2C0FC3D61FF434810094A6C9 /* MPDAAIcon.png in Resources */,
+				2C0FC3D71FF434810094A6C9 /* MPDAAIcon@2x.png in Resources */,
+				2C0FC3D81FF434810094A6C9 /* MPDAAIcon@3x.png in Resources */,
+				2C0FC3D91FF434810094A6C9 /* MPCountdownTimer.html in Resources */,
+				2C0FC3C51FF434420094A6C9 /* MPAdBrowserController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
