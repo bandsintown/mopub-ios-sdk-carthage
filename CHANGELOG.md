@@ -1,3 +1,14 @@
+## Version 4.20.1 (March 12, 2018)
+- **Bug Fixes**
+  - Fixes compatibility issues with some fullscreen ads on iPhone X
+
+## Version 4.20.0 (February 20, 2018)
+- **Bug Fixes**
+  - Fixed ad expiration check for rewarded ad formats
+
+- **Ad Network Mediation Updates**
+  - Network mediation adapters are now in a separate repository to enable an independent release cadence and faster updates to the adapters. Please find the new location [here](https://github.com/mopub/mopub-ios-mediation).
+
 ## Version 4.19.0 (December 11, 2017)
 - **Bug Fixes**
   - Ensure proper viewability initialization before ad content is loaded
@@ -6,9 +17,9 @@
   - Resolve WKWebView sizing and alignment issues on iPhoneX
 
 - **Ad Network Mediation Updates**
-  - Facebook Audience Network 4.26.1
-  - Flurry 8.1.0
-  - Millennial/AOL 6.6.0
+  - Certified Facebook Audience Network 4.26.1
+  - Certified Flurry 8.1.0
+  - Added support for Millennial/AOL Rewarded Video adapters for 6.6.0
 
 ## Version 4.18.0 (November 1, 2017)
 - **Features**
