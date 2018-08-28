@@ -9,8 +9,6 @@
 
 @interface MPAdServerURLBuilder (Testing)
 
-+ (NSString *)queryItemForKey:(NSString *)key value:(NSString *)value;
-+ (NSString *)queryParameterForAdvancedBidding;
-+ (NSString *)queryParameterForConsent;
++ (NSString *)advancedBiddingValue;
 
 @end

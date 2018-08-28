@@ -9,7 +9,7 @@
 
 #import "MPAdConfiguration.h"
 #import "MPBannerCustomEvent.h"
-#import "MPInstanceProvider.h"
+#import "MPCoreInstanceProvider.h"
 #import "MPLogging.h"
 #import "MPAdImpressionTimer.h"
 #import "MPBannerCustomEvent+Internal.h"
@@ -187,12 +187,15 @@
 
 - (void)adViewWillLogImpression:(UIView *)adView
 {
-    // Ads server impression
+    // Track impression for all impression trackers known by the SDK
     [self trackImpression];
-    // MPX and other trackers;
-    [self.bannerCustomEvent trackMPXAndThirdPartyImpressions];
+    // Track impression for all impression trackers included in the markup
+    [self.bannerCustomEvent trackImpressionsIncludedInMarkup];
     // Start viewability tracking
     [self.bannerCustomEvent startViewabilityTracker];
+
+    // Notify delegate that an impression tracker was fired
+    [self.delegate adapter:self didTrackImpressionForAd:adView];
 }
 
 @end

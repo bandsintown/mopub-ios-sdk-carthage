@@ -8,7 +8,6 @@
 #import "MPHTMLInterstitialViewController.h"
 #import "MPWebView.h"
 #import "MPAdDestinationDisplayAgent.h"
-#import "MPInstanceProvider.h"
 #import "MPViewabilityTracker.h"
 
 @interface MPHTMLInterstitialViewController ()
@@ -37,8 +36,7 @@
     [super viewDidLoad];
 
     self.view.backgroundColor = [UIColor blackColor];
-    self.backingViewAgent = [[MPInstanceProvider sharedProvider] buildMPAdWebViewAgentWithAdWebViewFrame:self.view.bounds
-                                                                                                delegate:self];
+    self.backingViewAgent = [[MPAdWebViewAgent alloc] initWithAdWebViewFrame:self.view.bounds delegate:self];
 }
 
 #pragma mark - Public
@@ -104,11 +102,14 @@
 
 #pragma mark - Autorotation
 
-- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
 {
-    [super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
+    [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext> context) {
+        UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
+        [self.backingViewAgent rotateToOrientation:orientation];
+     } completion:nil];
 
-    [self.backingViewAgent rotateToOrientation:self.interfaceOrientation];
+    [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
 }
 
 #pragma mark - MPAdWebViewAgentDelegate
