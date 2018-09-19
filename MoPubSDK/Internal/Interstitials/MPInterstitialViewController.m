@@ -42,7 +42,7 @@ static NSString * const kCloseButtonXImageName = @"MPCloseButtonX.png";
 {
     [super viewDidLoad];
 
-    self.view.backgroundColor = [UIColor blackColor];
+    self.view.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.4];
 }
 
 - (BOOL)prefersHomeIndicatorAutoHidden {
