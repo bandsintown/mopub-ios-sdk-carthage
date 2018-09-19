@@ -35,7 +35,7 @@
 {
     [super viewDidLoad];
 
-    self.view.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.7f];
+    self.view.backgroundColor = [UIColor blackColor];
     self.backingViewAgent = [[MPAdWebViewAgent alloc] initWithAdWebViewFrame:self.view.bounds delegate:self];
 }
 
