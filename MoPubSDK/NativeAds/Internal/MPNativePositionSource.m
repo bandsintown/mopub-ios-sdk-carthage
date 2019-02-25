@@ -1,8 +1,9 @@
 //
 //  MPNativePositionSource.m
-//  MoPub
 //
-//  Copyright (c) 2014 MoPub. All rights reserved.
+//  Copyright 2018-2019 Twitter, Inc.
+//  Licensed under the MoPub SDK License Agreement
+//  http://www.mopub.com/legal/sdk-license-agreement/
 //
 
 #import "MPNativePositionSource.h"
@@ -98,6 +99,12 @@ static const CGFloat kRetryIntervalBackoffMultiplier = 2.0;
         [strongSelf parsePositioningData:data];
     } errorHandler:^(NSError * _Nonnull error) {
         __typeof__(self) strongSelf = weakSelf;
+
+        // MPNativePositionSource was deallocated during a networking
+        // operation. Do nothing.
+        if (strongSelf == nil) {
+            return;
+        }
 
         if (strongSelf.retryInterval >= strongSelf.maximumRetryInterval) {
             strongSelf.completionHandler(nil, error);

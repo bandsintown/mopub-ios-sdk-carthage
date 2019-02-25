@@ -1,8 +1,9 @@
 //
 //  MPAdServerKeys.m
-//  MoPubSDK
 //
-//  Copyright © 2018 MoPub. All rights reserved.
+//  Copyright 2018-2019 Twitter, Inc.
+//  Licensed under the MoPub SDK License Agreement
+//  http://www.mopub.com/legal/sdk-license-agreement/
 //
 
 #import "MPAdServerKeys.h"
@@ -36,10 +37,14 @@ NSString * const kViewabilityStatusKey             = @"vv";
 NSString * const kKeywordsKey                      = @"q";
 NSString * const kUserDataKeywordsKey              = @"user_data_q";
 NSString * const kAdvancedBiddingKey               = @"abt";
+NSString * const kNetworkAdaptersKey               = @"adapters";
 NSString * const kLocationLatitudeLongitudeKey     = @"ll";
 NSString * const kLocationHorizontalAccuracy       = @"lla";
 NSString * const kLocationIsFromSDK                = @"llsdk";
 NSString * const kLocationLastUpdatedMilliseconds  = @"llf";
+
+#pragma mark - Ad Server Response Keys
+NSString * const kEnableDebugLogging               = @"enable_debug_logging";
 
 #pragma mark - Open Endpoint Request Keys
 NSString * const kOpenEndpointSessionTrackingKey   = @"st";

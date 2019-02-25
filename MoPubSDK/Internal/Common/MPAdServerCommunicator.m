@@ -1,8 +1,9 @@
 //
 //  MPAdServerCommunicator.m
-//  MoPub
 //
-//  Copyright (c) 2012 MoPub, Inc. All rights reserved.
+//  Copyright 2018-2019 Twitter, Inc.
+//  Licensed under the MoPub SDK License Agreement
+//  http://www.mopub.com/legal/sdk-license-agreement/
 //
 
 #import "MPAdServerCommunicator.h"
@@ -87,18 +88,12 @@ static NSString * const kAdResonsesContentKey = @"content";
 
     // Generate request
     MPURLRequest * request = [[MPURLRequest alloc] initWithURL:URL];
-    MPLogInfo(@"Loading ad with MoPub server URL: %@", request);
+    MPLogEvent([MPLogEvent adRequestedWithRequest:request]);
 
     __weak __typeof__(self) weakSelf = self;
     self.task = [MPHTTPNetworkSession startTaskWithHttpRequest:request responseHandler:^(NSData * data, NSHTTPURLResponse * response) {
         // Capture strong self for the duration of this block.
         __typeof__(self) strongSelf = weakSelf;
-
-        // Status code indicates an error.
-        if (response.statusCode >= 400) {
-            [strongSelf didFailWithError:[strongSelf errorForStatusCode:response.statusCode]];
-            return;
-        }
 
         // Handle the response.
         [strongSelf didFinishLoadingWithData:data];
@@ -126,9 +121,9 @@ static NSString * const kAdResonsesContentKey = @"content";
     if (configuration.beforeLoadURL != nil) {
         MPURLRequest * request = [MPURLRequest requestWithURL:configuration.beforeLoadURL];
         [MPHTTPNetworkSession startTaskWithHttpRequest:request responseHandler:^(NSData * _Nonnull data, NSHTTPURLResponse * _Nonnull response) {
-            MPLogTrace(@"Sucessfully sent before load URL");
+            MPLogDebug(@"Successfully sent before load URL");
         } errorHandler:^(NSError * _Nonnull error) {
-            MPLogWarn(@"Failed to send before load URL");
+            MPLogInfo(@"Failed to send before load URL");
         }];
     }
 }
@@ -137,24 +132,21 @@ static NSString * const kAdResonsesContentKey = @"content";
                       adapterLoadDuration:(NSTimeInterval)duration
                         adapterLoadResult:(MPAfterLoadResult)result
 {
-    NSURL * afterLoadUrl = [configuration afterLoadUrlWithLoadDuration:duration loadResult:result];
-    if (afterLoadUrl != nil) {
+    NSArray * afterLoadUrls = [configuration afterLoadUrlsWithLoadDuration:duration loadResult:result];
+
+    for (NSURL * afterLoadUrl in afterLoadUrls) {
         MPURLRequest * request = [MPURLRequest requestWithURL:afterLoadUrl];
         [MPHTTPNetworkSession startTaskWithHttpRequest:request responseHandler:^(NSData * _Nonnull data, NSHTTPURLResponse * _Nonnull response) {
-            MPLogTrace(@"Sucessfully sent after load URL");
+            MPLogDebug(@"Successfully sent after load URL: %@", afterLoadUrl);
         } errorHandler:^(NSError * _Nonnull error) {
-            MPLogWarn(@"Failed to send after load URL");
+            MPLogDebug(@"Failed to send after load URL: %@", afterLoadUrl);
         }];
     }
 }
 
 - (void)failLoadForSDKInit {
-    NSString * errorString = @"Ad prevented from loading. Error: Ad requested before initializing MoPub SDK. The MoPub SDK requires initializeSdkWithConfiguration:completion: to be called on MoPub.sharedInstance before attempting to load ads. Please update your integration.";
-    MPLogError(errorString);
-
-    NSError *error = [NSError errorWithDomain:kMOPUBErrorDomain
-                                         code:MOPUBErrorSDKNotInitialized
-                                     userInfo:@{ NSLocalizedDescriptionKey : errorString }];
+    NSError *error = [NSError adLoadFailedBecauseSdkNotInitialized];
+    MPLogEvent([MPLogEvent error:error message:nil]);
     [self didFailWithError:error];
 }
 
@@ -188,25 +180,30 @@ static NSString * const kAdResonsesContentKey = @"content";
     NSError * error = nil;
     NSDictionary * json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
     if (error) {
-        MPLogError(@"Failed to parse ad response JSON: %@", error.localizedDescription);
+        NSError * parseError = [NSError adResponseFailedToParseWithError:error];
+        MPLogEvent([MPLogEvent error:parseError message:nil]);
         self.loading = NO;
-        [self.delegate communicatorDidFailWithError:error];
+        [self.delegate communicatorDidFailWithError:parseError];
         return;
     }
 
-    // Handle consent overrides and strip them out of the top level JSON response.
-    json = [self handleConsentOverrides:json];
+    MPLogEvent([MPLogEvent adRequestReceivedResponse:json]);
 
+    // Handle ad server overrides and strip them out of the top level JSON response.
+    json = [self handleAdResponseOverrides:json];
+
+    // Add top level json attributes to each ad server response so MPAdConfiguration contains
+    // all attributes for an ad response.
     NSArray *responses = [self getFlattenJsonResponses:json keys:self.topLevelJsonKeys];
     if (responses == nil) {
-        MPLogError(@"No ad responses");
+        NSError * noResponsesError = [NSError adResponsesNotFound];
+        MPLogEvent([MPLogEvent error:noResponsesError message:nil]);
         self.loading = NO;
-        [self.delegate communicatorDidFailWithError:[MOPUBError errorWithCode:MOPUBErrorUnableToParseJSONAdResponse]];
+        [self.delegate communicatorDidFailWithError:noResponsesError];
         return;
     }
 
-    MPLogInfo(@"There are %ld ad responses", responses.count);
-
+    // Attempt to parse each ad response JSON into its corresponding MPAdConfiguration object.
     NSMutableArray<MPAdConfiguration *> * configurations = [NSMutableArray arrayWithCapacity:responses.count];
     for (NSDictionary * responseJson in responses) {
         // The `metadata` field is required and must contain at least one entry. The `content` field is optional.
@@ -214,7 +211,7 @@ static NSString * const kAdResonsesContentKey = @"content";
         NSDictionary * metadata = responseJson[kAdResonsesMetadataKey];
         NSData * content = [responseJson[kAdResonsesContentKey] dataUsingEncoding:NSUTF8StringEncoding];
         if (metadata == nil || (metadata != nil && metadata.count == 0)) {
-            MPLogError(@"The metadata field is either non-existent or empty");
+            MPLogInfo(@"The metadata field is either non-existent or empty");
             continue;
         }
 
@@ -243,13 +240,37 @@ static NSString * const kAdResonsesContentKey = @"content";
     NSMutableArray *flattenResponses = [NSMutableArray new];
     for (NSDictionary *response in responses) {
         NSMutableDictionary *flattenResponse = [response mutableCopy];
+        flattenResponse[kAdResonsesMetadataKey] = [response[kAdResonsesMetadataKey] mutableCopy];
+
         for (NSString *key in keys) {
-            flattenResponse[kAdResonsesMetadataKey] = [response[kAdResonsesMetadataKey] mutableCopy];
             flattenResponse[kAdResonsesMetadataKey][key] = json[key];
         }
         [flattenResponses addObject:flattenResponse];
     }
     return flattenResponses;
+}
+
+// Process any top level json attributes that trigger state changes within the SDK.
+/**
+ Handles all server-side overrides, and strips them out of the response JSON
+ so that they are not propagated to the rest of the responses.
+ @param serverResponseJson Top-level JSON response from the server
+ @return Top-level JSON response stripped of all override fields
+ */
+- (NSDictionary *)handleAdResponseOverrides:(NSDictionary *)serverResponseJson {
+    // Handle Consent
+    NSMutableDictionary * json = [[self handleConsentOverrides:serverResponseJson] mutableCopy];
+
+    // Handle the enabling of debug logging.
+    NSNumber * debugLoggingEnabled = json[kEnableDebugLogging];
+    if (debugLoggingEnabled != nil && [debugLoggingEnabled boolValue]) {
+        MPLogInfo(@"Debug logging enabled");
+        MPLogging.consoleLogLevel = MPLogLevelDebug;
+
+        json[kEnableDebugLogging] = nil;
+    }
+
+    return json;
 }
 
 #pragma mark - Internal

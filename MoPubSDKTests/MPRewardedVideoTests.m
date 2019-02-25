@@ -1,8 +1,9 @@
 //
 //  MPRewardedVideoTests.m
-//  MoPubSDK
 //
-//  Copyright © 2017 MoPub. All rights reserved.
+//  Copyright 2018-2019 Twitter, Inc.
+//  Licensed under the MoPub SDK License Agreement
+//  http://www.mopub.com/legal/sdk-license-agreement/
 //
 
 #import <XCTest/XCTest.h>
@@ -31,9 +32,8 @@ static const NSTimeInterval kTestTimeout = 2; // seconds
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         MPMoPubConfiguration * config = [[MPMoPubConfiguration alloc] initWithAdUnitIdForAppInitialization:kTestAdUnitId];
-        config.advancedBidders = nil;
+        config.additionalNetworks = nil;
         config.globalMediationSettings = nil;
-        config.mediatedNetworks = nil;
         [MoPub.sharedInstance initializeSdkWithConfiguration:config completion:nil];
     });
 }

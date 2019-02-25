@@ -1,27 +1,30 @@
 //
 //  MPAdServerURLBuilder.m
-//  MoPub
 //
-//  Copyright (c) 2012 MoPub. All rights reserved.
+//  Copyright 2018-2019 Twitter, Inc.
+//  Licensed under the MoPub SDK License Agreement
+//  http://www.mopub.com/legal/sdk-license-agreement/
 //
 
 #import "MPAdServerURLBuilder.h"
 
 #import <CoreLocation/CoreLocation.h>
 
-#import "MPAdvancedBiddingManager.h"
 #import "MPAdServerKeys.h"
+#import "MPAPIEndpoints.h"
+#import "MPConsentManager.h"
 #import "MPConstants.h"
+#import "MPCoreInstanceProvider+MRAID.h"
+#import "MPError.h"
 #import "MPGeolocationProvider.h"
 #import "MPGlobal.h"
 #import "MPIdentityProvider.h"
-#import "MPCoreInstanceProvider.h"
+#import "MPLogging.h"
+#import "MPMediationManager.h"
 #import "MPReachabilityManager.h"
-#import "MPAPIEndpoints.h"
 #import "MPViewabilityTracker.h"
 #import "NSString+MPAdditions.h"
 #import "NSString+MPConsentStatus.h"
-#import "MPConsentManager.h"
 
 static NSString * const kMoPubInterfaceOrientationPortrait = @"p";
 static NSString * const kMoPubInterfaceOrientationLandscape = @"l";
@@ -231,7 +234,10 @@ static NSInteger const kAdSequenceNone = -1;
 
 + (NSString *)isMRAIDEnabledSDKValue
 {
-    return NSClassFromString(@"MPMRAIDBannerCustomEvent") != Nil && NSClassFromString(@"MPMRAIDInterstitialCustomEvent") != Nil ? @"1" : nil;
+    BOOL isMRAIDEnabled = [[MPCoreInstanceProvider sharedProvider] isMraidJavascriptAvailable] &&
+                          NSClassFromString(@"MPMRAIDBannerCustomEvent") != Nil &&
+                          NSClassFromString(@"MPMRAIDInterstitialCustomEvent") != Nil;
+    return isMRAIDEnabled ? @"1" : nil;
 }
 
 + (NSString *)connectionTypeValue
@@ -319,18 +325,26 @@ static NSInteger const kAdSequenceNone = -1;
 }
 
 + (NSString *)advancedBiddingValue {
-    // Opted out of advanced bidding, no query parameter should be sent.
-    if (![MPAdvancedBiddingManager sharedManager].advancedBiddingEnabled) {
-        return nil;
-    }
-
-    // No JSON at this point means that no advanced bidders were initialized.
-    NSString * tokens = MPAdvancedBiddingManager.sharedManager.bidderTokensJson;
+    // Retrieve the tokens
+    NSDictionary * tokens = MPMediationManager.sharedManager.advancedBiddingTokens;
     if (tokens == nil) {
         return nil;
     }
 
-    return tokens;
+    // Serialize the JSON dictionary into a JSON string.
+    NSError * error = nil;
+    NSData * jsonData = [NSJSONSerialization dataWithJSONObject:tokens options:0 error:&error];
+    if (jsonData == nil) {
+        NSError * jsonError = [NSError serializationOfJson:tokens failedWithError:error];
+        MPLogEvent([MPLogEvent error:jsonError message:nil]);
+        return nil;
+    }
+
+    return [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+}
+
++ (NSDictionary *)adapterInformation {
+    return MPMediationManager.sharedManager.adRequestPayload;
 }
 
 + (NSDictionary *)locationInformationDictionary:(CLLocation *)location {

@@ -1,14 +1,16 @@
 //
 //  MPRewardedVideoAdapter.m
-//  MoPubSDK
 //
-//  Copyright (c) 2015 MoPub. All rights reserved.
+//  Copyright 2018-2019 Twitter, Inc.
+//  Licensed under the MoPub SDK License Agreement
+//  http://www.mopub.com/legal/sdk-license-agreement/
 //
 
 #import "MPRewardedVideoAdapter.h"
 
 #import "MPAdConfiguration.h"
 #import "MPAdServerURLBuilder.h"
+#import "MPAdTargeting.h"
 #import "MPAnalyticsTracker.h"
 #import "MPCoreInstanceProvider.h"
 #import "MPError.h"
@@ -66,22 +68,24 @@ static const NSUInteger kExcessiveCustomDataLength = 8196;
     [[MPCoreInstanceProvider sharedProvider] keepObjectAliveForCurrentRunLoopIteration:_rewardedVideoCustomEvent];
 }
 
-- (void)getAdWithConfiguration:(MPAdConfiguration *)configuration
+- (void)getAdWithConfiguration:(MPAdConfiguration *)configuration targeting:(MPAdTargeting *)targeting
 {
     MPLogInfo(@"Looking for custom event class named %@.", configuration.customEventClass);
 
     self.configuration = configuration;
     MPRewardedVideoCustomEvent *customEvent = [[configuration.customEventClass alloc] init];
     if (![customEvent isKindOfClass:[MPRewardedVideoCustomEvent class]]) {
-        MPLogError(@"**** Custom Event Class: %@ does not extend MPRewardedVideoCustomEvent ****", NSStringFromClass(configuration.customEventClass));
-        NSError *error = [NSError errorWithDomain:MoPubRewardedVideoAdsSDKDomain code:MPRewardedVideoAdErrorInvalidCustomEvent userInfo:nil];
+        NSError * error = [NSError customEventClass:configuration.customEventClass doesNotInheritFrom:MPRewardedVideoCustomEvent.class];
+        MPLogEvent([MPLogEvent error:error message:nil]);
         [self.delegate rewardedVideoDidFailToLoadForAdapter:nil error:error];
         return;
     }
     customEvent.delegate = self;
+    customEvent.localExtras = targeting.localExtras;
 
     self.rewardedVideoCustomEvent = customEvent;
     [self startTimeoutTimer];
+
     [self.rewardedVideoCustomEvent requestRewardedVideoWithCustomEventInfo:configuration.customEventClassData adMarkup:configuration.advancedBidPayload];
 }
 
@@ -98,7 +102,7 @@ static const NSUInteger kExcessiveCustomDataLength = 8196;
     if (customDataLength > 0 && self.configuration.rewardedVideoCompletionUrl != nil) {
         // Warn about excessive custom data length, but allow the custom data to be sent anyway
         if (customDataLength > kExcessiveCustomDataLength) {
-            MPLogWarn(@"Custom data length %ld exceeds the receommended maximum length of %ld characters.", customDataLength, kExcessiveCustomDataLength);
+            MPLogInfo(@"Custom data length %lu exceeds the receommended maximum length of %lu characters.", (unsigned long)customDataLength, (unsigned long)kExcessiveCustomDataLength);
         }
 
         self.customData = customData;
@@ -131,7 +135,7 @@ static const NSUInteger kExcessiveCustomDataLength = 8196;
 
 - (void)timeout
 {
-    NSError * error = [MOPUBError errorWithCode:MOPUBErrorAdRequestTimedOut localizedDescription:@"Rewarded video ad request timed out"];
+    NSError * error = [NSError errorWithCode:MOPUBErrorAdRequestTimedOut localizedDescription:@"Rewarded video ad request timed out"];
     [self.delegate rewardedVideoDidFailToLoadForAdapter:self error:error];
     self.delegate = nil;
 }

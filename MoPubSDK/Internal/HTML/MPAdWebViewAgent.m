@@ -1,8 +1,9 @@
 //
 //  MPAdWebViewAgent.m
-//  MoPub
 //
-//  Copyright (c) 2013 MoPub. All rights reserved.
+//  Copyright 2018-2019 Twitter, Inc.
+//  Licensed under the MoPub SDK License Agreement
+//  http://www.mopub.com/legal/sdk-license-agreement/
 //
 
 #import "MPAdWebViewAgent.h"
@@ -266,7 +267,7 @@
             [self.delegate adDidFailToLoadAd:self.view];
             break;
         default:
-            MPLogWarn(@"MPAdWebView - unsupported MoPub URL: %@", [URL absoluteString]);
+            MPLogInfo(@"MPAdWebView - unsupported MoPub URL: %@", [URL absoluteString]);
             break;
     }
 }
