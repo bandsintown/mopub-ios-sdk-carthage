@@ -1,15 +1,15 @@
 //
-//  UIButton+MPAdditions.h
+//  MPNativeAd+Testing.h
 //
 //  Copyright 2018-2019 Twitter, Inc.
 //  Licensed under the MoPub SDK License Agreement
 //  http://www.mopub.com/legal/sdk-license-agreement/
 //
 
-#import <UIKit/UIKit.h>
+#import "MPNativeAd+Internal.h"
 
-@interface UIButton (MPAdditions)
+@interface MPNativeAd (Testing)
 
-@property (nonatomic) UIEdgeInsets mp_TouchAreaInsets;
+- (void)trackImpression;
 
 @end

@@ -33,6 +33,7 @@ NSString * const kCreativeIdMetadataKey = @"x-creativeid";
 NSString * const kCustomEventClassNameMetadataKey = @"x-custom-event-class-name";
 NSString * const kCustomEventClassDataMetadataKey = @"x-custom-event-class-data";
 NSString * const kNextUrlMetadataKey = @"x-next-url";
+NSString * const kFormatMetadataKey = @"adunit-format";
 NSString * const kBeforeLoadUrlMetadataKey = @"x-before-load-url";
 NSString * const kAfterLoadUrlMetadataKey = @"x-after-load-url";
 NSString * const kAfterLoadSuccessUrlMetadataKey = @"x-after-load-success-url";
@@ -48,6 +49,7 @@ NSString * const kWidthMetadataKey = @"x-width";
 NSString * const kDspCreativeIdKey = @"x-dspcreativeid";
 NSString * const kPrecacheRequiredKey = @"x-precacherequired";
 NSString * const kIsVastVideoPlayerKey = @"x-vastvideoplayer";
+NSString * const kImpressionDataMetadataKey = @"impdata";
 
 NSString * const kInterstitialAdTypeMetadataKey = @"x-fulladtype";
 NSString * const kOrientationTypeMetadataKey = @"x-orientation";
@@ -113,6 +115,7 @@ NSString * const kAdvancedBiddingMarkupMetadataKey = @"adm";
 - (NSURL *)URLFromMetadata:(NSDictionary *)metadata forKey:(NSString *)key;
 - (NSArray <NSURL *> *)URLsFromMetadata:(NSDictionary *)metadata forKey:(NSString *)key;
 - (Class)setUpCustomEventClassFromMetadata:(NSDictionary *)metadata;
+- (MPImpressionData *)impressionDataFromMetadata:(NSDictionary *)metadata;
 
 @end
 
@@ -139,6 +142,7 @@ NSString * const kAdvancedBiddingMarkupMetadataKey = @"adm";
                                               forKey:kClickthroughMetadataKey];
         self.nextURL = [self URLFromMetadata:metadata
                                          forKey:kNextUrlMetadataKey];
+        self.format = [metadata objectForKey:kFormatMetadataKey];
         self.beforeLoadURL = [self URLFromMetadata:metadata forKey:kBeforeLoadUrlMetadataKey];
         self.afterLoadUrlsWithMacros = [self URLStringsFromMetadata:metadata forKey:kAfterLoadUrlMetadataKey];
         self.afterLoadSuccessUrlsWithMacros = [self URLStringsFromMetadata:metadata forKey:kAfterLoadSuccessUrlMetadataKey];
@@ -185,6 +189,8 @@ NSString * const kAdvancedBiddingMarkupMetadataKey = @"adm";
 
         self.impressionMinVisibleTimeInSec = [self timeIntervalFromMsmetadata:metadata forKey:kBannerImpressionVisableMsMetadataKey];
         self.impressionMinVisiblePixels = [[self adAmountFromMetadata:metadata key:kBannerImpressionMinPixelMetadataKey] floatValue];
+
+        self.impressionData = [self impressionDataFromMetadata:metadata];
 
         // Organize impression tracking URLs
         NSArray <NSURL *> * URLs = [self URLsFromMetadata:metadata forKey:kImpressionTrackersMetadataKey];
@@ -263,14 +269,12 @@ NSString * const kAdvancedBiddingMarkupMetadataKey = @"adm";
     NSMutableDictionary *convertedCustomEvents = [NSMutableDictionary dictionary];
     if (self.adType == MPAdTypeInline) {
         [convertedCustomEvents setObject:@"MPGoogleAdMobBannerCustomEvent" forKey:@"admob_native"];
-        [convertedCustomEvents setObject:@"MPMillennialBannerCustomEvent" forKey:@"millennial_native"];
         [convertedCustomEvents setObject:@"MPHTMLBannerCustomEvent" forKey:@"html"];
         [convertedCustomEvents setObject:@"MPMRAIDBannerCustomEvent" forKey:@"mraid"];
         [convertedCustomEvents setObject:@"MOPUBNativeVideoCustomEvent" forKey:@"json_video"];
         [convertedCustomEvents setObject:@"MPMoPubNativeCustomEvent" forKey:@"json"];
     } else if (self.adType == MPAdTypeFullscreen) {
         [convertedCustomEvents setObject:@"MPGoogleAdMobInterstitialCustomEvent" forKey:@"admob_full"];
-        [convertedCustomEvents setObject:@"MPMillennialInterstitialCustomEvent" forKey:@"millennial_full"];
         [convertedCustomEvents setObject:@"MPHTMLInterstitialCustomEvent" forKey:@"html"];
         [convertedCustomEvents setObject:@"MPMRAIDInterstitialCustomEvent" forKey:@"mraid"];
         [convertedCustomEvents setObject:@"MPMoPubRewardedVideoCustomEvent" forKey:@"rewarded_video"];
@@ -293,8 +297,23 @@ NSString * const kAdvancedBiddingMarkupMetadataKey = @"adm";
 
 - (NSDictionary *)customEventClassDataFromMetadata:(NSDictionary *)metadata
 {
+    // Parse out custom event data if its present
     NSDictionary *result = [self dictionaryFromMetadata:metadata forKey:kCustomEventClassDataMetadataKey];
-    if (!result) {
+    if (result != nil) {
+        // Inject the unified ad unit format into the custom data so that
+        // all adapters (including mediated ones) can differentiate between
+        // banner and medium rectangle formats.
+        // The key `adunit_format` is used to denote the format, which is the same as the
+        // key for impression level revenue data since they represent the same information.
+        NSString *format = [metadata objectForKey:kFormatMetadataKey];
+        if (format.length > 0) {
+            NSMutableDictionary *dictionary = [result mutableCopy];
+            dictionary[kImpressionDataAdUnitFormatKey] = format;
+            result = dictionary;
+        }
+    }
+    // No custom event data found; this is probably a native ad payload.
+    else {
         result = [self dictionaryFromMetadata:metadata forKey:kNativeSDKParametersMetadataKey];
     }
     return result;
@@ -360,6 +379,11 @@ NSString * const kAdvancedBiddingMarkupMetadataKey = @"adm";
     }
 
     return urls.count > 0 ? urls : nil;
+}
+
+- (BOOL)isMraidAd
+{
+    return [self.metadataAdType isEqualToString:kAdTypeMraid];
 }
 
 #pragma mark - Private
@@ -607,6 +631,17 @@ NSString * const kAdvancedBiddingMarkupMetadataKey = @"adm";
         return NO;
     }
     return YES;
+}
+
+- (MPImpressionData *)impressionDataFromMetadata:(NSDictionary *)metadata
+{
+    NSDictionary * impressionDataDictionary = metadata[kImpressionDataMetadataKey];
+    if (impressionDataDictionary == nil) {
+        return nil;
+    }
+
+    MPImpressionData * impressionData = [[MPImpressionData alloc] initWithDictionary:impressionDataDictionary];
+    return impressionData;
 }
 
 @end

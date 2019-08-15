@@ -42,13 +42,6 @@
 
 @implementation MPInterstitialAdManager
 
-@synthesize loading = _loading;
-@synthesize ready = _ready;
-@synthesize delegate = _delegate;
-@synthesize communicator = _communicator;
-@synthesize adapter = _adapter;
-@synthesize requestingConfiguration = _requestingConfiguration;
-
 - (id)initWithDelegate:(id<MPInterstitialAdManagerDelegate>)delegate
 {
     self = [super init];
@@ -97,10 +90,7 @@
         [self.delegate managerDidLoadInterstitial:self];
     } else {
         self.targeting = targeting;
-        [self loadAdWithURL:[MPAdServerURLBuilder URLWithAdUnitID:ID
-                                                         keywords:targeting.keywords
-                                                 userDataKeywords:targeting.userDataKeywords
-                                                         location:targeting.location]];
+        [self loadAdWithURL:[MPAdServerURLBuilder URLWithAdUnitID:ID targeting:targeting]];
     }
 }
 
@@ -178,7 +168,7 @@
     [self.delegate manager:self didFailToLoadInterstitialWithError:error];
 }
 
-- (void)setUpAdapterWithConfiguration:(MPAdConfiguration *)configuration;
+- (void)setUpAdapterWithConfiguration:(MPAdConfiguration *)configuration
 {
     // Notify Ad Server of the adapter load. This is fire and forget.
     [self.communicator sendBeforeLoadUrlWithConfiguration:configuration];
@@ -293,6 +283,10 @@
 - (void)interstitialWillLeaveApplicationForAdapter:(MPBaseInterstitialAdapter *)adapter
 {
     MPLogAdEvent(MPLogEvent.adWillLeaveApplication, self.delegate.interstitialAdController.adUnitId);
+}
+
+- (void)interstitialDidReceiveImpressionEventForAdapter:(MPBaseInterstitialAdapter *)adapter {
+    [self.delegate interstitialAdManager:self didReceiveImpressionEventWithImpressionData:self.requestingConfiguration.impressionData];
 }
 
 @end
