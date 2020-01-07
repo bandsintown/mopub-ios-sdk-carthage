@@ -1,4 +1,35 @@
-## Version 5.8.0 (July 22, 2019)
+## Version 5.10.0 (October 30, 2019)
+- **Features**
+  - Added support for the Verizon native ad renderer.
+  - Deprecated base custom event `requestAd` calls without the `adMarkup` parameter.
+
+- **Bug Fixes**
+  - Fixed non-native SDK target compilation error.
+  - Fixed potential crash in `MPTableViewAdPlacer` and `MPCollectionViewAdPlacer`.
+  - Removed extraneous `NSLog` statements for Release build configuration.
+  - Fixed VAST error code macro replacement in tracking URLs.
+
+## Version 5.9.0 (September 16, 2019)
+- **Features**
+  - Add iOS 13 support to both SDK and MoPub Sample app. 
+  - Totally remove `UIWebView` implementation and comments in MoPub SDK and MoPub Sample app.
+  - Add multi-window support for MoPub Sample app in iPadOS 13. New window can be opened by Drag & Dropping an ad cell in the ad list.
+  - Remove support for `tel` and `sms` functions for MRAID ads.
+  - Add Dark Mode support for MoPub Sample app in iOS 13.
+  - Remove the Objective C sample app project.
+  - Adopt `XCFramework` and the new Xcode build system with fastlane script updates, and thus require Xcode 11 to build instead of Xcode 9.
+  - Remove deprecated VAST extension `MoPubViewabilityTracker`.
+  - Replace deprecated `MPMoviePlayerViewController` with `AVPlayerViewController`. This affects MRAID videos.
+  - Replace deprecated `UIAlertView` with `UIAlertViewController`.
+
+- **Bug Fixes**
+  - Update `MPRealTimeTimer` so that it can properly handle foreground notifications that aren't balanced with backgrounding notifications.
+  - Fix an assertion crash in GDPR Sync that only happens in debug builds.
+  - Present `SKStoreProductViewController` only in portrait mode, so that we can prevent a `SKStoreProductViewController` crash in landscape mode (as designed by Apple).
+  - Fix an infinite load ad bug that happens when the ad URL to retry is the same as the failed ad URL.
+  - Fix a bug where location information is not sent to Ad Server when location permission has been allowed, the app can collect PII, and no app-specified location is set.
+  
+  ## Version 5.8.0 (July 22, 2019)
 - **Features**
   - Minimum version of the MoPub SDK bumped to iOS 9.
   - StoreKit Improvement: New Apple URL schemes for apps.apple.com, books.apple.com, and music.apple.com are now parsed for `SKStoreProductViewController`.
@@ -26,6 +57,7 @@
 - **Features**
   - Impression Level Revenue Data: A data object that includes revenue information associated with each impression
   - Verizon Ads SDK now supported as a mediated network
+  - Native ad renderer registration for FacebookNativeCustomEvent and MillennialNativeCustomEvent is removed from the SDK. Pubishers must register renderers in their app.
 
 - **Bug Fixes**
   - Fixed bug where native video fires an impression when main image asset is missing

@@ -34,15 +34,15 @@ class InterstitialAdDataSource: NSObject, AdDataSource {
      */
     lazy var title: [AdEvent: String] = {
         var titleStrings: [AdEvent: String] = [:]
-        titleStrings[.didLoad]            = "interstitialDidLoadAd(_:)"
-        titleStrings[.didFailToLoad]      = "interstitialDidFailToLoadAd(_:)"
-        titleStrings[.willAppear]         = "interstitialWillAppear(_:)"
-        titleStrings[.didAppear]          = "interstitialDidAppear(_:)"
-        titleStrings[.willDisappear]      = "interstitialWillDisappear(_:)"
-        titleStrings[.didDisappear]       = "interstitialDidDisappear(_:)"
-        titleStrings[.didExpire]          = "interstitialDidExpire(_:)"
-        titleStrings[.clicked]            = "interstitialDidReceiveTapEvent(_:)"
-        titleStrings[.didTrackImpression] = "mopubAd(_:, didTrackImpressionWith _:)"
+        titleStrings[.didLoad]            = CallbackFunctionNames.interstitialDidLoadAd
+        titleStrings[.didFailToLoad]      = CallbackFunctionNames.interstitialDidFailToLoadAd
+        titleStrings[.willAppear]         = CallbackFunctionNames.interstitialWillAppear
+        titleStrings[.didAppear]          = CallbackFunctionNames.interstitialDidAppear
+        titleStrings[.willDisappear]      = CallbackFunctionNames.interstitialWillDisappear
+        titleStrings[.didDisappear]       = CallbackFunctionNames.interstitialDidDisappear
+        titleStrings[.didExpire]          = CallbackFunctionNames.interstitialDidExpire
+        titleStrings[.clicked]            = CallbackFunctionNames.interstitialDidReceiveTapEvent
+        titleStrings[.didTrackImpression] = CallbackFunctionNames.didTrackImpression
         
         return titleStrings
     }()
@@ -116,6 +116,11 @@ class InterstitialAdDataSource: NSObject, AdDataSource {
      Queries if the data source currently requesting an ad.
      */
     private(set) var isAdLoading: Bool = false
+    
+    /**
+    Optional ad size used for requesting inline ads. This should be `nil` for non-inline ads.
+    */
+    var requestedAdSize: CGSize? = nil
     
     // MARK: - Ad Loading
     

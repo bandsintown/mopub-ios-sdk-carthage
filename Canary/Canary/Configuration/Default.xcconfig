@@ -9,4 +9,7 @@
 // Configuration settings file format documentation can be found at:
 // https://help.apple.com/xcode/#/dev745c5c974
 
-PRODUCT_NAME   = Canary
+// If the display name of the app should be changed, we should change `CFBundleDisplayName` instead
+// of `PRODUCT_NAME`, because `PRODUCT_NAME` is widely used for the module name, build path, and many
+// implicit references when Xcode makes a build and execute tests - thing can go wrong very easily.
+PRODUCT_NAME = Canary

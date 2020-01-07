@@ -39,12 +39,12 @@ class BannerAdDataSource: NSObject, AdDataSource {
      */
     lazy var title: [AdEvent: String] = {
         var titleStrings: [AdEvent: String] = [:]
-        titleStrings[.didLoad] = "adViewDidLoadAd(_:, adSize _:)"
-        titleStrings[.didFailToLoad] = "adView(_:, didFailToLoadAdWithError _:)"
-        titleStrings[.willPresentModal] = "willPresentModalViewForAd(_:)"
-        titleStrings[.didDismissModal] = "didDismissModalViewForAd(_:)"
-        titleStrings[.clicked] = "willLeaveApplicationFromAd(_:)"
-        titleStrings[.didTrackImpression] = "mopubAd(_:, didTrackImpressionWith _:)"
+        titleStrings[.didLoad] = CallbackFunctionNames.adViewDidLoadAd
+        titleStrings[.didFailToLoad] = CallbackFunctionNames.adViewDidFailToLoadAd
+        titleStrings[.willPresentModal] = CallbackFunctionNames.willPresentModalViewForAd
+        titleStrings[.didDismissModal] = CallbackFunctionNames.didDismissModalViewForAd
+        titleStrings[.clicked] = CallbackFunctionNames.willLeaveApplicationFromAd
+        titleStrings[.didTrackImpression] = CallbackFunctionNames.didTrackImpression
         
         return titleStrings
     }()
@@ -127,6 +127,23 @@ class BannerAdDataSource: NSObject, AdDataSource {
      Queries if the data source currently requesting an ad.
      */
     private(set) var isAdLoading: Bool = false
+    
+    /**
+    Optional ad size used for requesting inline ads. This should be `nil` for non-inline ads.
+    */
+    var requestedAdSize: CGSize? {
+        get {
+            return maxDesiredAdSize
+        }
+        set {
+            guard let newValue = newValue else {
+                maxDesiredAdSize = kMPPresetMaxAdSizeMatchFrame
+                return
+            }
+            
+            maxDesiredAdSize = newValue
+        }
+    }
     
     // MARK: - Ad Loading
     
